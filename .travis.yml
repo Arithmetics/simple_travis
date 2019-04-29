@@ -1,17 +1,41 @@
 dist: xenial
 
-language: go
-
 branches: 
   only:
     - master
     - dev
 
-go:
-  - 1.12.x
+env:
+  - DATADIR=/Users/brocktillotson/6DDATA
 
 git:
   depth: 1
 
-script:
-  - go test
+notifications:
+  email: false
+  webhooks:
+    - https://hooks.slack.com/services/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
+
+services:
+  - postgresql
+  - mongodb
+
+before_script:
+  - psql -c 'create database travis_ci_test;' -U postgres
+  - mongo mydb_test --eval 'db.createUser({user:"travis",pwd:"test",roles:["readWrite"]});'
+
+matrix: 
+  include:
+    - language: go
+      go:
+        - 1.12.x
+      script:
+      - go test
+    - language: node_js
+      node_js:
+        - "stable"
+      cache:
+        directories:
+        - node_modules
+      script:
+      - npm test

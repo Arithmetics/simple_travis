@@ -3,6 +3,7 @@ package main
 import (
 	"testing"
 
+	"github.com/EndFirstCorp/onedb/mgo"
 	"github.com/sajari/fuzzy"
 )
 
@@ -10,6 +11,12 @@ func TestGoodFunc(t *testing.T) {
 
 	if goodFunc() != "looks good" {
 		t.Error("ERROR")
+	}
+}
+
+func TestEnv(t *testing.T) {
+	if envFunc() != "/Users/brocktillotson/6DDATA" {
+		t.Error("not the right env")
 	}
 }
 
@@ -31,3 +38,37 @@ func TestWords(t *testing.T) {
 // 		t.Error("ERROR")
 // 	}
 // }
+
+// func TestInsertIntoMongo(t *testing.T) {
+// 	m, err := mgo.Dial("localhost")
+
+// 	if err != nil {
+// 		t.Fatal(err)
+// 	}
+
+// 	if err := insertIntoMongo(m, 12, 32); err != nil {
+// 		t.Fatal(err)
+// 	}
+// }
+
+func TestReadMongo(t *testing.T) {
+	m, err := mgo.Dial("localhost")
+
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	if err := insertIntoMongo(m, 12, 32); err != nil {
+		t.Fatal(err)
+	}
+
+	if err := insertIntoMongo(m, 54, 99); err != nil {
+		t.Fatal(err)
+	}
+
+	basket, err := readMongo(m)
+
+	if len(basket) != 2 {
+		t.Errorf("wanted two baskets, got %v \n", len(basket))
+	}
+}
