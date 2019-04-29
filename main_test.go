@@ -9,9 +9,9 @@ func TestGoodFunc(t *testing.T) {
 	}
 }
 
-// func TestBadFunc(t *testing.T) {
+func TestBadFunc(t *testing.T) {
 
-// 	if badFunc() != "looks good" {
-// 		t.Error("ERROR")
-// 	}
-// }
+	if badFunc() != "looks good" {
+		t.Error("ERROR")
+	}
+}
