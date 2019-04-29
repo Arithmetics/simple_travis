@@ -1,8 +1,6 @@
 package main
 
 import (
-	"fmt"
-	"os"
 	"testing"
 
 	"github.com/EndFirstCorp/onedb/mgo"
@@ -41,14 +39,20 @@ func TestWords(t *testing.T) {
 // 	}
 // }
 
-func TestInsertIntoMongo(t *testing.T) {
-	dbConnection := os.Getenv("MONGO_CONNECTION")
-	if dbConnection == "" {
-		fmt.Println("MONGO_CONNECTION not set. Defaulting to localhost")
-		dbConnection = "localhost"
-	}
+// func TestInsertIntoMongo(t *testing.T) {
+// 	m, err := mgo.Dial("localhost")
 
-	m, err := mgo.Dial(dbConnection)
+// 	if err != nil {
+// 		t.Fatal(err)
+// 	}
+
+// 	if err := insertIntoMongo(m, 12, 32); err != nil {
+// 		t.Fatal(err)
+// 	}
+// }
+
+func TestReadMongo(t *testing.T) {
+	m, err := mgo.Dial("localhost")
 
 	if err != nil {
 		t.Fatal(err)
@@ -58,4 +62,13 @@ func TestInsertIntoMongo(t *testing.T) {
 		t.Fatal(err)
 	}
 
+	if err := insertIntoMongo(m, 54, 99); err != nil {
+		t.Fatal(err)
+	}
+
+	basket, err := readMongo(m)
+
+	if len(basket) != 2 {
+		t.Errorf("wanted two baskets, got %v \n", len(basket))
+	}
 }
