@@ -1,8 +1,11 @@
 package main
 
 import (
+	"fmt"
+	"os"
 	"testing"
 
+	"github.com/EndFirstCorp/onedb/mgo"
 	"github.com/sajari/fuzzy"
 )
 
@@ -37,3 +40,22 @@ func TestWords(t *testing.T) {
 // 		t.Error("ERROR")
 // 	}
 // }
+
+func TestInsertIntoMongo(t *testing.T) {
+	dbConnection := os.Getenv("MONGO_CONNECTION")
+	if dbConnection == "" {
+		fmt.Println("MONGO_CONNECTION not set. Defaulting to localhost")
+		dbConnection = "localhost"
+	}
+
+	m, err := mgo.Dial(dbConnection)
+
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	if err := insertIntoMongo(m, 12, 32); err != nil {
+		t.Fatal(err)
+	}
+
+}
