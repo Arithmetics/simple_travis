@@ -16,6 +16,14 @@ notifications:
   webhooks:
     - https://hooks.slack.com/services/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
 
+services:
+  - postgresql
+  - mongodb
+
+before_script:
+  - psql -c 'create database travis_ci_test;' -U postgres
+  - mongo mydb_test --eval 'db.createUser({user:"travis",pwd:"test",roles:["readWrite"]});'
+
 matrix: 
   include:
     - language: go
