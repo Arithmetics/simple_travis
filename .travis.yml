@@ -5,6 +5,9 @@ branches:
     - master
     - dev
 
+env:
+  - DATADIR=/Users/brocktillotson/6DDATA
+
 git:
   depth: 1
 
