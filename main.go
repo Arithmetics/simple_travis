@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"os"
 
 	"github.com/sajari/fuzzy"
 )
@@ -12,6 +13,10 @@ func goodFunc() string {
 
 func badFunc() string {
 	return "this one bad"
+}
+
+func envFunc() string {
+	return os.Getenv("DATADIR")
 }
 
 func main() {
