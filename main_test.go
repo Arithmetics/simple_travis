@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"os"
 	"testing"
 
@@ -86,6 +87,7 @@ func TestPsql(t *testing.T) {
 	if psqlConnection == "" {
 		psqlConnection = "postgresql://brocktillotson:uiop7890&*()@localhost:5432/travis_ci_test"
 	}
+	fmt.Printf("%+v\n", psqlConnection)
 	conn, err := onedb.NewPgxFromURI(psqlConnection)
 
 	if err != nil {
