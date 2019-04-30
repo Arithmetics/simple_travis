@@ -68,7 +68,7 @@ func TestReadMongo(t *testing.T) {
 
 	basket, err := readMongo(m)
 
-	if len(basket) != 4 {
+	if len(basket) != 2 {
 		t.Errorf("wanted two baskets, got %v \n", len(basket))
 	}
 }
