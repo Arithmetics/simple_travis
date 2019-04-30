@@ -5,6 +5,7 @@ import (
 	"os"
 
 	"github.com/EndFirstCorp/onedb/mgo"
+	cool "github.com/arithmetics/simple_dependency"
 	"gopkg.in/mgo.v2/bson"
 )
 
@@ -20,6 +21,10 @@ func goodFunc() string {
 
 func badFunc() string {
 	return "this one bad"
+}
+
+func getCool() string {
+	return cool.Cool()
 }
 
 func envFunc() string {

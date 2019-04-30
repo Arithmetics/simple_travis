@@ -72,3 +72,9 @@ func TestReadMongo(t *testing.T) {
 		t.Errorf("wanted two baskets, got %v \n", len(basket))
 	}
 }
+
+func TestGetCool(t *testing.T) {
+	if getCool() != "cool" {
+		t.Error("dependency management not working")
+	}
+}
