@@ -5,6 +5,9 @@ branches:
     - master
     - dev
 
+env:
+  - PSQLCONN=postgresql://postgres:@localhost:5432/travis_ci_test
+
 git:
   depth: 1
 
