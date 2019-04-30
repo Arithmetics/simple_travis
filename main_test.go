@@ -17,11 +17,11 @@ func TestGoodFunc(t *testing.T) {
 	}
 }
 
-func TestEnv(t *testing.T) {
-	if envFunc() != "/Users/brocktillotson/6DDATA" {
-		t.Error("not the right env")
-	}
-}
+// func TestEnv(t *testing.T) {
+// 	if envFunc() != "/Users/brocktillotson/6DDATA" {
+// 		t.Error("not the right env")
+// 	}
+// }
 
 func TestWords(t *testing.T) {
 	model := fuzzy.NewModel()
@@ -109,7 +109,7 @@ func TestPsql(t *testing.T) {
 
 	fmt.Printf("%+v\n", fun)
 
-	if len(fun) != 2 {
+	if len(fun) != 3 {
 		t.Error("not enough records")
 	}
 
