@@ -1,1 +1,0 @@
-psql -U postgres -d travis_ci_test -c "CREATE TABLE fun (cool int, verycool int)"

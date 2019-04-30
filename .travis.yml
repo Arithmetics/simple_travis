@@ -7,6 +7,7 @@ branches:
 
 env:
   - DATADIR=/Users/brocktillotson/6DDATA
+  - PSQLCONN=postgresql://postgres:@localhost:5432/travis_ci_test 
 
 git:
   depth: 1
@@ -23,6 +24,7 @@ services:
 before_script:
   - psql -c 'create database travis_ci_test;' -U postgres
   - mongo mydb_test --eval 'db.createUser({user:"travis",pwd:"test",roles:["readWrite"]});'
+  - ./dbScript/import.sh
 
 matrix: 
   include:

@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/EndFirstCorp/onedb"
 	"github.com/EndFirstCorp/onedb/mgo"
 	cool "github.com/arithmetics/simple_dependency"
 	"gopkg.in/mgo.v2/bson"
@@ -51,19 +52,29 @@ func readMongo(m mgo.Sessioner) ([]Basket, error) {
 	return baskets, err
 }
 
+// Fun whatever
+type Fun struct {
+	Cool     int32
+	VeryCool int32
+}
+
 func main() {
-	dbConnection := os.Getenv("MONGO_CONNECTION")
-	if dbConnection == "" {
-		fmt.Println("MONGO_CONNECTION not set. Defaulting to localhost")
-		dbConnection = "localhost"
-	}
-	m, err := mgo.Dial(dbConnection)
 
-	if err != nil {
-		fmt.Printf("Error connecting to MongoDB - %v \n", err)
+	psqlConnection := os.Getenv("PSQLCONN")
+	if psqlConnection == "" {
+		psqlConnection = "postgresql://brocktillotson:uiop7890&*()@localhost:5432/travis_ci_test"
+	}
+	conn, _ := onedb.NewPgxFromURI(psqlConnection)
+
+	fun := []Fun{}
+
+	query := onedb.NewSqlQuery(`SELECT cool, verycool FROM fun`)
+
+	if err := conn.QueryStruct(query, &fun); err != nil {
+		fmt.Println(err)
 	}
 
-	insertIntoMongo(m, 6, 9)
+	fmt.Printf("%+v\n", fun)
 
 	// fmt.Printf("%+v\n", len(readMongo(m)))
 }
