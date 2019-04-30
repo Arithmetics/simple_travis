@@ -6,8 +6,7 @@ branches:
     - dev
 
 env:
-  - DATADIR=/Users/brocktillotson/6DDATA
-  - PSQLCONN=postgresql://postgres:@localhost:5432/travis_ci_test 
+  - PSQLCONN=postgresql://postgres:@localhost:5432/travis_ci_test
 
 git:
   depth: 1
@@ -24,7 +23,8 @@ services:
 before_script:
   - psql -c 'create database travis_ci_test;' -U postgres
   - mongo mydb_test --eval 'db.createUser({user:"travis",pwd:"test",roles:["readWrite"]});'
-  - ./dbScript/import.sh
+  - psql -U postgres -d travis_ci_test -c "CREATE TABLE fun (cool int, verycool int);"
+  - psql -U postgres -d travis_ci_test -c "INSERT INTO fun (cool, verycool) VALUES (55, 888);"
 
 matrix: 
   include:
