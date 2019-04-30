@@ -107,6 +107,8 @@ func TestPsql(t *testing.T) {
 
 	conn.QueryStruct(query, &fun)
 
+	fmt.Printf("%+v\n", fun)
+
 	if len(fun) != 2 {
 		t.Error("not enough records")
 	}
