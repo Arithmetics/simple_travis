@@ -6,6 +6,7 @@ branches:
     - dev
 
 env:
+  - 6DDATA="/Users/brocktillotson/6DDATA"
   - PSQLCONN=postgresql://postgres:@localhost:5432/travis_ci_test
 
 git:
