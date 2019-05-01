@@ -25,7 +25,7 @@ before_script:
   - mongo mydb_test --eval 'db.createUser({user:"travis",pwd:"test",roles:["readWrite"]});'
   - psql -U postgres -d travis_ci_test -c "CREATE TABLE fun (cool int, verycool int);"
   - psql -U postgres -d travis_ci_test -c "INSERT INTO fun (cool, verycool) VALUES (55, 888);"
-  - git config --global url."https://github.com/".insteadOf https://github.com
+  # - git config --global url."https://github.com/".insteadOf https://github.com
 
 matrix: 
   include:
